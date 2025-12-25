@@ -72,8 +72,9 @@ fun MainScreen() {
                     Modifier
                         .fillMaxWidth()
                         .height(maxWidth)
-                        .background(colorResource(R.color.white))
-                )
+                ) {
+                    //Здесь картинка с камеры, кропнутая в RoundedCornerShape
+                }
             }
         }
     }
