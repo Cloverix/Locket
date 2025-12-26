@@ -12,19 +12,16 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.cloverix.locket.ui.theme.LocketTheme
+import com.cloverix.locket.features.mainscreen.ui.MainScreen
+import com.cloverix.locket.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LocketTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize()
-                ) { innerPadding ->
-
-                }
+            AppTheme (darkTheme = true) {
+                MainScreen()
             }
         }
     }
