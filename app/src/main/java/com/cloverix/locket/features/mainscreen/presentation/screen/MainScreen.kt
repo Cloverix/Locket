@@ -1,6 +1,5 @@
-package com.cloverix.locket.features.mainscreen.ui
+package com.cloverix.locket.features.mainscreen.presentation.screen
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,10 +15,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -28,25 +25,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cloverix.locket.R
 import com.cloverix.locket.ui.theme.AppTheme
-import com.cloverix.locket.ui.theme.displayFontFamily
 
 @Composable
 fun MainScreen() {
@@ -56,7 +47,6 @@ fun MainScreen() {
         color = MaterialTheme.colorScheme.background,
         modifier = Modifier
             .fillMaxSize()
-
     ) {
         Column {
             //Top row: profile, friends and chat buttons
@@ -65,22 +55,31 @@ fun MainScreen() {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .wrapContentHeight()
                     .systemBarsPadding()
                     .padding(vertical = 5.dp)
             ) {
                 //Profile button
-                Button(
-                    onClick = {
-                        //navController takes to profile screen
-                    }
-                ) {}
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable(
+                            onClick = {
+                                //navController takes to profile screen
+                            }
+                        )
+                ) {
+                    //Circular profile image here
+                }
                 //Friends button
                 Button(
                     onClick = {
                         //navController takes to friends screen
                     },
                     modifier = Modifier
-                        .wrapContentSize()
+                        .height(50.dp)
                 ) {
                     Text(
                         text = "Friends",
@@ -88,11 +87,25 @@ fun MainScreen() {
                     )
                 }
                 //Chat button
-                Button(
-                    onClick = {
-                        //navCompose takes to chat screen
-                    }
-                ) {}
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable(
+                            onClick = {
+                                //navCompose takes to chat screen
+                            }
+                        )
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.chat_circle),
+                        contentDescription = "Chat icon",
+                        tint = colorResource(R.color.black),
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                    )
+                }
             }
             Spacer(Modifier.height(20.dp))
             //Place for camera image
@@ -108,7 +121,7 @@ fun MainScreen() {
             Spacer(Modifier.height(30.dp))
             //Bottom row: flash, take a photo and flip camera buttons
             Row(
-                horizontalArrangement = Arrangement.SpaceAround,
+                horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
